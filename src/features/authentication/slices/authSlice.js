@@ -6,7 +6,7 @@ export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, 
     const response = await login(credentials);
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue({ error: error.message });
   }
 });
 
@@ -15,7 +15,7 @@ export const registerUser = createAsyncThunk('auth/registerUser', async (userDat
     const response = await register(userData);
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue({ error: error.message });
   }
 });
 
@@ -24,7 +24,7 @@ export const registerUserEmployer = createAsyncThunk('auth/registerEmployer', as
     const response = await registerEmployer(userData);
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue({ error: error.message });
   }
 });
 
@@ -33,7 +33,7 @@ export const getUserProfile = createAsyncThunk('auth/getProfile', async (_, thun
     const response = await getProfile();
     return response;
   } catch (error) {
-    return thunkAPI.rejectWithValue(error.message);
+    return thunkAPI.rejectWithValue({ error: error.message });
   }
 });
 
@@ -68,35 +68,35 @@ const authSlice = createSlice({
         state.loading = false;
         state.user = action.payload.user;
         state.token = action.payload.token;
-        localStorage.setItem('token', action.payload.token);
         localStorage.setItem('user', JSON.stringify(action.payload.user));
+        localStorage.setItem('token', action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload.error;
       })
       .addCase(registerUser.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(registerUser.fulfilled, (state) => {
         state.loading = false;
         state.error = null;
       })
       .addCase(registerUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload.error;
       })
       .addCase(registerUserEmployer.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(registerUserEmployer.fulfilled, (state, action) => {
+      .addCase(registerUserEmployer.fulfilled, (state) => {
         state.loading = false;
       })
       .addCase(registerUserEmployer.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload.error;
       })
       .addCase(getUserProfile.pending, (state) => {
         state.loading = true;
@@ -108,7 +108,7 @@ const authSlice = createSlice({
       })
       .addCase(getUserProfile.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message;
+        state.error = action.payload.error;
       });
   },
 });

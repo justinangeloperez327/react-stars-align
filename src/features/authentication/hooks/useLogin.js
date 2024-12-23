@@ -14,8 +14,6 @@ const useLogin = () => {
     const resultAction = await dispatch(loginUser(credentials));
     if (loginUser.fulfilled.match(resultAction)) {
       const userRole = resultAction.payload.user.role;
-      console.log(job._id);
-      console.log(userRole);
       if (userRole === 'admin') {
         navigate('/admin/dashboard');
       } else if (userRole === 'employer') {

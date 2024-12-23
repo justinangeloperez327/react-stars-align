@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-
-import axios from 'axios';
+import { getProfile, updatePassword as updatePasswordService, updateProfile as updateProfileService } from '../services/profileService';
 
 const initialState = {
   profile: null,
@@ -8,9 +7,31 @@ const initialState = {
   error: null,
 };
 
-export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (userId) => {
-  const response = await axios.get(`/api/profile/${userId}`);
-  return response.data;
+export const fetchProfile = createAsyncThunk('profile/fetchProfile', async (_, thunkAPI) => {
+  try {
+    const response = await getProfile();
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const updatePassword = createAsyncThunk('profile/updatePassword', async (passwordData, thunkAPI) => {
+  try {
+    const response = await updatePasswordService(passwordData);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
+});
+
+export const updateProfile = createAsyncThunk('profile/updateProfile', async (profileData, thunkAPI) => {
+  try {
+    const response = await updateProfileService(profileData);
+    return response.data;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 const profileSlice = createSlice({

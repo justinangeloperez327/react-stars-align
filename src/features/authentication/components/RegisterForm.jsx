@@ -1,21 +1,17 @@
 import { Button, Field, Fieldset, Input, Label } from "@headlessui/react";
 import React, { useState } from "react";
 
-import { useNavigate } from "react-router";
 import useRegister from "../hooks/useRegister";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const { handleRegister, loading, error } = useRegister();
-    const navigate = useNavigate();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = handleRegister({ email, password });
-        if (result) {
-            navigate('/login');
-        }
+        handleRegister({ email, password });
     };
 
     return (
