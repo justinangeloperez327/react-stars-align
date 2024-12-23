@@ -7,8 +7,13 @@ const useRegister = () => {
   const dispatch = useDispatch();
   const { loading, error } = useSelector((state) => state.auth);
 
-  const handleRegister = (userData) => {
-    dispatch(registerUser(userData));
+  const handleRegister = async (userData) => {
+    const resultAction = await dispatch(registerUser(userData));
+    if (registerUser.fulfilled.match(resultAction)) {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   useEffect(() => {

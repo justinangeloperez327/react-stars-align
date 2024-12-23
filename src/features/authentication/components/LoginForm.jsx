@@ -1,5 +1,6 @@
 import { Button, Field, Fieldset, Input, Label } from '@headlessui/react'
 
+import clsx from 'clsx';
 import useLogin from '../hooks/useLogin';
 import { useState } from 'react'
 
@@ -31,6 +32,7 @@ const LoginForm = () => {
                         autoFocus
                         onChange={(e) => setEmail(e.target.value)}
                         required
+                        disabled={loading}
                     />
                 </Field>
 
@@ -49,6 +51,7 @@ const LoginForm = () => {
                         autoComplete="password"
                         onChange={(e) => setPassword(e.target.value)}
                         required
+                        disabled={loading}
                     />
                 </Field>
 
@@ -58,9 +61,13 @@ const LoginForm = () => {
                 <div className="flex items-center justify-end mt-4">
                     <Button
                         type="submit"
-                        className="inline-flex items-center px-4 py-2 bg-violet-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-4"
+                        className={clsx(
+                            "inline-flex items-center px-4 py-2 bg-violet-800 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest",
+                            "hover:bg-gray-700 active:bg-gray-900 focus:outline-none focus:border-gray-900 focus:ring focus:ring-gray-300 disabled:opacity-25 transition ml-4"
+                        )}
+                        disabled={loading}
                     >
-                        Sign In
+                        {loading ? 'Loading...' : 'Login'}
                     </Button>
                 </div>
             </Fieldset>

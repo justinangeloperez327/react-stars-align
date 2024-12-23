@@ -1,14 +1,22 @@
 import { createApplication as createApplicationService, deleteApplication, fetchApplication, fetchApplications, updateApplication } from '../services/applicationsService';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const getApplications = createAsyncThunk('applications/getApplications', async () => {
-  const response = await fetchApplications();
-  return response;
+export const getApplications = createAsyncThunk('applications/getApplications', async (_, thunkAPI) => {
+  try {
+    const response = await fetchApplications();
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
 });
 
-export const getApplication = createAsyncThunk('applications/getApplication', async (applicationId) => {
-  const response = await fetchApplication(applicationId);
-  return response;
+export const getApplication = createAsyncThunk('applications/getApplication', async (applicationId, thunkAPI) => {
+  try {
+    const response = await fetchApplication(applicationId);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
 });
 
 export const createApplication = createAsyncThunk('applications/addApplication', async (application, thunkAPI) => {
@@ -20,14 +28,22 @@ export const createApplication = createAsyncThunk('applications/addApplication',
   }
 });
 
-export const editApplication = createAsyncThunk('applications/editApplication', async ({ applicationId, application }) => {
-  const response = await updateApplication(applicationId, application);
-  return response;
+export const editApplication = createAsyncThunk('applications/editApplication', async ({ applicationId, application }, thunkAPI) => {
+  try {
+    const response = await updateApplication(applicationId, application);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
 });
 
-export const removeApplication = createAsyncThunk('applications/removeApplication', async (applicationId) => {
-  const response = await deleteApplication(applicationId);
-  return response;
+export const removeApplication = createAsyncThunk('applications/removeApplication', async (applicationId, thunkAPI) => {
+  try {
+    const response = await deleteApplication(applicationId);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
 });
 
 const applicationsSlice = createSlice({

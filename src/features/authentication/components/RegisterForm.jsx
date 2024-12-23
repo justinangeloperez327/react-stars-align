@@ -10,7 +10,7 @@ const RegisterForm = () => {
     const { handleRegister, loading, error } = useRegister();
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const result = handleRegister({ email, password });
         if (result) {

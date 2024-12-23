@@ -1,24 +1,40 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { getProfile, login, register, registerEmployer } from '../services/authService';
 
-export const loginUser = createAsyncThunk('auth/loginUser', async (credentials) => {
-  const response = await login(credentials);
-  return response;
+export const loginUser = createAsyncThunk('auth/loginUser', async (credentials, thunkAPI) => {
+  try {
+    const response = await login(credentials);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
-export const registerUser = createAsyncThunk('auth/registerUser', async (userData) => {
-  const response = await register(userData);
-  return response;
+export const registerUser = createAsyncThunk('auth/registerUser', async (userData, thunkAPI) => {
+  try {
+    const response = await register(userData);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
-export const registerUserEmployer = createAsyncThunk('auth/registerEmployer', async (userData) => {
-  const response = await registerEmployer(userData);
-  return response;
+export const registerUserEmployer = createAsyncThunk('auth/registerEmployer', async (userData, thunkAPI) => {
+  try {
+    const response = await registerEmployer(userData);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
-export const getUserProfile = createAsyncThunk('auth/getProfile', async () => {
-  const response = await getProfile();
-  return response;
+export const getUserProfile = createAsyncThunk('auth/getProfile', async (_, thunkAPI) => {
+  try {
+    const response = await getProfile();
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 const authSlice = createSlice({
