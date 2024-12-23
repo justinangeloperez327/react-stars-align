@@ -5,7 +5,7 @@ import { Suspense } from 'react';
 import useJobs from '../hooks/useJobs'
 
 const JobsList = () => {
-    const { jobs, error } = useJobs();
+    const { jobs = [], error } = useJobs();
 
     return (
         <>
