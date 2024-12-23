@@ -3,9 +3,13 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createJob as createJobService, deleteJob, fetchAppliedJobs, fetchEmployerJobs, fetchJob, fetchJobApplications, fetchJobDetails, fetchJobs, updateJob } from '../services/jobsService';
 
-export const getJobs = createAsyncThunk('jobs/getJobs', async (query) => {
-  const response = await fetchJobs(query);
-  return response;
+export const getJobs = createAsyncThunk('jobs/getJobs', async (query, thunkAPI) => {
+  try {
+    const response = await fetchJobs(query);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 export const getJob = createAsyncThunk('jobs/getJob', async (jobId, thunkAPI) => {
@@ -50,13 +54,21 @@ export const removeJob = createAsyncThunk('jobs/removeJob', async (jobId) => {
 });
 
 export const getEmployerJobs = createAsyncThunk('jobs/getEmployerJobs', async ({ page, limit }, thunkAPI) => {
-  const response = await fetchEmployerJobs(page, limit);
-  return response;
+  try {
+    const response = await fetchEmployerJobs(page, limit);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
-export const getJobApplications = createAsyncThunk('jobs/getJobApplications', async (jobId) => {
-  const response = await fetchJobApplications(jobId);
-  return response;
+export const getJobApplications = createAsyncThunk('jobs/getJobApplications', async (jobId, thunkAPI) => {
+  try {
+    const response = await fetchJobApplications(jobId);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue(error.message);
+  }
 });
 
 export const getAppliedJobs = createAsyncThunk('jobs/getAppliedJobs', async ({ page, limit }, thunkAPI) => {
