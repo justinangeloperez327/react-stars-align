@@ -4,7 +4,6 @@ import {
     BriefcaseIcon,
     ChevronDownIcon,
     HomeIcon,
-    UserIcon,
     UsersIcon,
     XMarkIcon
 } from "@heroicons/react/20/solid";
@@ -94,7 +93,7 @@ function DashboardLayout() {
                                             anchor="bottom end"
                                             className="w-52 origin-top-right mt-2 rounded-xl bg-black border border-white/5  p-1 text-sm/6 text-white transition duration-100 ease-out [--anchor-gap:var(--spacing-1)] focus:outline-none data-[closed]:scale-95 data-[closed]:opacity-0"
                                         >
-                                            <MenuItem>
+                                            {/* <MenuItem>
                                                 <Link
                                                     to={`/employer/profile`}
                                                     className="group flex w-full items-center gap-2 rounded-lg py-1.5 px-3 data-[focus]:bg-white/30"
@@ -102,7 +101,7 @@ function DashboardLayout() {
                                                     <UserIcon className="size-4 fill-white/30" />
                                                     Profile
                                                 </Link>
-                                            </MenuItem>
+                                            </MenuItem> */}
 
                                             <div className="my-1 h-px bg-white/5" />
 

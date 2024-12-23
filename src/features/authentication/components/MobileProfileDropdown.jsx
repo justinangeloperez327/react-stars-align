@@ -1,7 +1,6 @@
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/20/solid'
 import { Disclosure, DisclosureButton, DisclosurePanel } from '@headlessui/react'
 
-import { Link } from 'react-router'
 import React from 'react'
 import { logout } from '../slices/authSlice';
 import { useDispatch } from 'react-redux'
@@ -28,9 +27,9 @@ const MobileProfileDropdown = () => {
                     </DisclosureButton>
                     <DisclosurePanel className="size-10 group-data-[hover]:fill-white/50 group-data-[open]:rotate-180">
                         <div className="py-1">
-                            <DisclosureButton as={Link} to="/profile" className="block text-lg font-bold">
+                            {/* <DisclosureButton as={Link} to="/profile" className="block text-lg font-bold">
                                 Profile
-                            </DisclosureButton>
+                            </DisclosureButton> */}
                             <DisclosureButton as="button" onClick={handleLogout} className="block text-lg font-bold">
                                 Logout
                             </DisclosureButton>
