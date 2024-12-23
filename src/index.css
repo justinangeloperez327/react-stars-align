@@ -1,0 +1,80 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes fadeScaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.80);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.10);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes leftToRight {
+    from {
+        transform: translateX(-100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes rightToLeft {
+    from {
+        transform: translateX(100%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.left-to-right {
+    animation: leftToRight 0.5s ease-in-out;
+}
+
+.right-to-left {
+    animation: rightToLeft 0.5s ease-in-out;
+}
+
+.form-fade-in {
+  animation: fadeScaleIn 0.8s ease-in-out;
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+.fade-up {
+    animation: fadeUp 0.8s ease-in-out;
+}
