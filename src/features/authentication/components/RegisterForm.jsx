@@ -11,7 +11,7 @@ const RegisterForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        handleRegister({ email, password });
+        await handleRegister({ email, password });
     };
 
     return (
