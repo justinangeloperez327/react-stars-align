@@ -55,7 +55,6 @@ const LoginForm = () => {
                     />
                 </Field>
 
-                {loading && <p>Loading...</p>}
                 {error && <p className="text-red-500 mt-2">{error}</p>}
 
                 <div className="flex items-center justify-end mt-4">

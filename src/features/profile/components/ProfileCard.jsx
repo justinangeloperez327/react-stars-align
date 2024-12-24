@@ -1,27 +1,32 @@
-import React from 'react'
+import ProfileEducationForm from './ProfileEducationForm';
+import ProfileExperienceForm from './ProfileExperienceForm';
+import ProfileForm from './ProfileForm';
+import SkeletonProfileCard from './SkeletonProfileCard';
+import { Suspense } from 'react'
 import useProfile from '../hooks/useProfile';
 
 const ProfileCard = () => {
-  const { profile, loading, error } = useProfile();
+  const { profile, error } = useProfile();
 
   return (
-    <div className="px-4 py-6">
-      {loading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
-      {profile && (
-        <div className="fade-up bg-white p-4 rounded-lg">
-          <div className="px-4 sm:px-0">
-            <h1 className="text-lg/7 font-semibold text-gray-900">Profile</h1>
+    <>
+      {error && <p className="text-red-500">{error}</p>}
+      <Suspense fallback={<Loading />}>
+        {profile && (
+          <div className="px-4 py-6">
+            {/* <ProfileForm /> */}
+            <ProfileEducationForm />
+            <ProfileExperienceForm />
           </div>
-          <div className="mt-6 border-t border-gray-100">
-            <dl className="divide-gray-700 divide-y-2">
+        )}
+      </Suspense >
+    </>
+  )
+}
 
-            </dl>
-          </div>
-
-        </div>
-      )}
-    </div>
+const Loading = () => {
+  return (
+    <SkeletonProfileCard />
   )
 }
 

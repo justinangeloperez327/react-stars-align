@@ -124,8 +124,8 @@ const jobsSlice = createSlice({
         state.error = null;
       })
       .addCase(getJob.fulfilled, (state, action) => {
-        state.loading = false;
         state.job = action.payload;
+        state.loading = false;
       })
       .addCase(getJob.rejected, (state, action) => {
         state.loading = false;

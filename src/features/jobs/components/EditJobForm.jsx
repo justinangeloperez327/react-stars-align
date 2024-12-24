@@ -1,5 +1,5 @@
 import { Button, Field, Fieldset, Input, Label, Select, Textarea } from '@headlessui/react'
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 
 import clsx from 'clsx'
 import { formatDate } from '@utils/DateFormat';
@@ -10,7 +10,6 @@ import useUpdateJob from '../hooks/useUpdateJob';
 const EditJobForm = () => {
     const { jobId } = useParams();
     const { job } = useJob(jobId);
-
     const { handleUpdateJob, loading, error } = useUpdateJob();
 
     const [title, setTitle] = useState('');
@@ -56,7 +55,7 @@ const EditJobForm = () => {
     };
 
     return (
-        <>
+        <Suspense fallback={<Loading />}>
             <form onSubmit={handleSubmit}>
                 <Fieldset>
                     <Field>
@@ -102,6 +101,7 @@ const EditJobForm = () => {
                                 Type
                             </Label>
                             <Select
+                                id='type'
                                 className={clsx(
                                     'mt-1 block w-full rounded-lg border-none bg-white/20 py-2 px-3 text-sm/6 text-white',
                                     'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
@@ -186,6 +186,7 @@ const EditJobForm = () => {
                                 Education
                             </Label>
                             <Select
+                                id='education'
                                 className={clsx(
                                     'mt-1 block w-full rounded-lg border-none bg-white/20 py-2 px-3 text-sm/6 text-white',
                                     'focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25',
@@ -258,8 +259,12 @@ const EditJobForm = () => {
                     </div>
                 </Fieldset>
             </form>
-        </>
+        </Suspense>
     )
+}
+
+const Loading = () => {
+    return <p>Loading...</p>
 }
 
 export default EditJobForm

@@ -33,6 +33,7 @@ const RegisterForm = () => {
                         autoFocus
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
+                        disabled={loading}
                     />
                 </Field>
 
@@ -52,6 +53,7 @@ const RegisterForm = () => {
                         autoComplete="current-password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        disabled={loading}
                     />
                 </Field>
 
@@ -63,8 +65,9 @@ const RegisterForm = () => {
                     <Button
                         type="submit"
                         className="inline-flex items-center justify-center w-full px-4 py-3 bg-violet-800 border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-violet-700 active:bg-violet-900 focus:outline-none focus:border-violet-900 focus:ring focus:ring-violet-300 disabled:opacity-25 transition"
+                        disabled={loading}
                     >
-                        Register
+                        {loading ? "Loading..." : "Register"}
                     </Button>
                 </div>
             </Fieldset>

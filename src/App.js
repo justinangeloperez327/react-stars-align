@@ -18,7 +18,7 @@ import EmployerJobCreate from './pages/employer-dashboard/jobs/JobCreatePage';
 import EmployerJobEdit from './pages/employer-dashboard/jobs/JobEditPage';
 import EmployerJobsLayout from './pages/employer-dashboard/jobs/JobsLayout';
 import EmployerJobsPage from './pages/employer-dashboard/jobs/JobsPage';
-import EmployerProfilePage from './pages/employer-dashboard/ProfilePage';
+import EmployerProfilePage from './pages/employer-dashboard/profile/ProfilePage';
 import EmployerRoute from './routes/EmployerRoute';
 import HomePage from './pages/HomePage';
 import JobPage from './pages/JobPage';

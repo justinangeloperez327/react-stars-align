@@ -54,6 +54,7 @@ const RegisterEmployerForm = () => {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder='Enter your email'
+                        disabled={loading}
                     />
                 </Field>
 
@@ -71,6 +72,7 @@ const RegisterEmployerForm = () => {
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder='Enter your password'
+                        disabled={loading}
                     />
                 </Field>
                 {/* divider */}
@@ -90,6 +92,7 @@ const RegisterEmployerForm = () => {
                             value={companyName}
                             onChange={(e) => setCompanyName(e.target.value)}
                             placeholder="e.g., Tech Solutions Inc."
+                            disabled={loading}
                         />
 
                     </Field>
@@ -108,6 +111,7 @@ const RegisterEmployerForm = () => {
                             value={size}
                             onChange={(e) => setSize(e.target.value)}
                             placeholder="e.g., 50"
+                            disabled={loading}
                         />
 
                     </Field>
@@ -128,6 +132,7 @@ const RegisterEmployerForm = () => {
                             value={industry}
                             onChange={(e) => setIndustry(e.target.value)}
                             placeholder="e.g., Information Technology"
+                            disabled={loading}
                         />
                     </Field>
 
@@ -145,6 +150,7 @@ const RegisterEmployerForm = () => {
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
                             placeholder="e.g., New York, NY"
+                            disabled={loading}
                         />
 
                     </Field>
@@ -160,11 +166,10 @@ const RegisterEmployerForm = () => {
                         id="vision"
                         type="text"
                         name="vision"
-
                         value={vision}
                         onChange={(e) => setVision(e.target.value)}
                         placeholder="e.g., To be the leading tech company"
-
+                        disabled={loading}
                     />
 
                 </Field>
@@ -179,10 +184,10 @@ const RegisterEmployerForm = () => {
                         id="mission"
                         type="text"
                         name="mission"
-
                         value={mission}
                         onChange={(e) => setMission(e.target.value)}
                         placeholder="e.g., To innovate and inspire"
+                        disabled={loading}
                     />
 
                 </Field>
@@ -197,23 +202,22 @@ const RegisterEmployerForm = () => {
                         id="values"
                         type="text"
                         name="values"
-
                         value={values}
                         onChange={(e) => setValues(e.target.value)}
                         placeholder="e.g., Integrity, Innovation, Excellence"
+                        disabled={loading}
                     />
 
                 </Field>
 
-                {loading && <p>Loading...</p>}
                 {error && <p className="text-red-500">{error}</p>}
-
                 <div className="flex mt-4">
                     <Button
                         type="submit"
                         className="inline-flex items-center justify-center w-full px-4 py-3 bg-violet-800 border border-transparent rounded-md font-semibold text-sm text-white tracking-widest hover:bg-violet-700 active:bg-violet-900 focus:outline-none focus:border-violet-900 focus:ring focus:ring-violet-300 disabled:opacity-25 transition"
+                        disabled={loading}
                     >
-                        Register
+                        {loading ? "Loading..." : "Register"}
                     </Button>
                 </div>
             </Fieldset>

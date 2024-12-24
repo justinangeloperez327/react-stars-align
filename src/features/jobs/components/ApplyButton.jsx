@@ -23,11 +23,7 @@ const ApplyButton = () => {
         <Button
             onClick={handleApply}
             className={clsx(
-                'w-full',
-                'mt-4',
-                'px-4',
-                'py-2',
-                'text-white',
+                'w-full mt-4 px-4 py-2 text-white rounded-md',
                 job?.applied && 'bg-gray-400 cursor-not-allowed',
                 !job?.applied && 'bg-violet-600 hover:bg-violet hover:bg-opacity-90'
             )}

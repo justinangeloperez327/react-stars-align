@@ -16,7 +16,7 @@ const ApplicationSuccess = () => {
                 </div>
                 <div className="px-4 py-6 flex w-full sm:px-0 justify-center">
                     <Link to='/' className="w-full sm:w-auto">
-                        <Button>
+                        <Button className={`w-full sm:w-auto bg-violet-800 text-white px-4 py-2 rounded-md hover:bg-violet-600`}>
                             Back to Jobs
                         </Button>
                     </Link>
