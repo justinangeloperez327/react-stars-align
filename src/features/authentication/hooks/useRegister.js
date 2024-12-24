@@ -13,7 +13,7 @@ const useRegister = () => {
     const resultAction = await dispatch(registerUser(userData));
 
     if (registerUser.fulfilled.match(resultAction)) {
-      navigate('/login');
+      navigate('/register-success');
       return true;
     } else {
       return false;

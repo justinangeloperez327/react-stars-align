@@ -16,7 +16,8 @@ export const register = async (userData) => {
     const response = await axios.post(`${API_URL}/register`, userData);
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Failed to register');
+    console.log(error.response);
+    throw new Error(error.response?.data?.error || 'Failed to register');
   }
 };
 
@@ -25,7 +26,7 @@ export const registerEmployer = async (userData) => {
     const response = await axios.post(`${API_URL}/register-employer`, userData);
     return response.data;
   } catch (error) {
-    throw new Error(error.response?.data?.message || 'Failed to register');
+    throw new Error(error.response?.data?.error || 'Failed to register');
   }
 };
 

@@ -1,4 +1,4 @@
-import { createApplication as createApplicationService, deleteApplication, fetchApplication, fetchApplications, updateApplication } from '../services/applicationsService';
+import { acceptApplication as acceptApplicationService, createApplication as createApplicationService, deleteApplication, fetchApplication, fetchApplications, rejectApplication as rejectApplicationService, updateApplication } from '../services/applicationsService';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 export const getApplications = createAsyncThunk('applications/getApplications', async (_, thunkAPI) => {
@@ -46,6 +46,25 @@ export const removeApplication = createAsyncThunk('applications/removeApplicatio
   }
 });
 
+export const acceptApplication = createAsyncThunk('applications/acceptApplication', async (applicationId, thunkAPI) => {
+  try {
+    console.log(applicationId);
+    const response = await acceptApplicationService(applicationId);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
+});
+
+export const rejectApplication = createAsyncThunk('applications/rejectApplication', async (applicationId, thunkAPI) => {
+  try {
+    const response = await rejectApplicationService(applicationId);
+    return response;
+  } catch (error) {
+    return thunkAPI.rejectWithValue({ error: error.message });
+  }
+});
+
 const applicationsSlice = createSlice({
   name: 'applications',
   initialState: {
@@ -53,8 +72,6 @@ const applicationsSlice = createSlice({
     application: {},
     loading: false,
     error: null,
-    page: 1,
-    totalPages: 1,
   },
   reducers: {
     resetApplicationsState: (state) => {
@@ -69,8 +86,7 @@ const applicationsSlice = createSlice({
         state.loading = true;
       })
       .addCase(getApplications.fulfilled, (state, action) => {
-        state.applications = action.payload.applications;
-        state.totalPages = action.payload.totalPages;
+        state.applications = action.payload;
         state.loading = false;
       })
       .addCase(getApplications.rejected, (state, action) => {
@@ -91,7 +107,7 @@ const applicationsSlice = createSlice({
       .addCase(createApplication.pending, (state) => {
         state.loading = true;
       })
-      .addCase(createApplication.fulfilled, (state, action) => {
+      .addCase(createApplication.fulfilled, (state) => {
         state.error = null;
         state.loading = false;
       })
@@ -118,6 +134,28 @@ const applicationsSlice = createSlice({
         state.loading = false;
       })
       .addCase(removeApplication.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+      .addCase(acceptApplication.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(acceptApplication.fulfilled, (state, action) => {
+        state.application = action.payload;
+        state.loading = false;
+      })
+      .addCase(acceptApplication.rejected, (state, action) => {
+        state.error = action.error.message;
+        state.loading = false;
+      })
+      .addCase(rejectApplication.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(rejectApplication.fulfilled, (state, action) => {
+        state.application = action.payload;
+        state.loading = false;
+      })
+      .addCase(rejectApplication.rejected, (state, action) => {
         state.error = action.error.message;
         state.loading = false;
       });

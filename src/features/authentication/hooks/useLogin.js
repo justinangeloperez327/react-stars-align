@@ -12,6 +12,7 @@ const useLogin = () => {
 
   const handleLogin = async (credentials) => {
     const resultAction = await dispatch(loginUser(credentials));
+
     if (loginUser.fulfilled.match(resultAction)) {
       const userRole = resultAction.payload.user.role;
       if (userRole === 'admin') {
@@ -19,7 +20,9 @@ const useLogin = () => {
       } else if (userRole === 'employer') {
         navigate('/employer/dashboard');
       } else {
-        if (job) {
+        console.log(job._id)
+        if (job._id) {
+
           navigate(`/jobs/${job._id}/application`);
         } else {
           navigate('/');

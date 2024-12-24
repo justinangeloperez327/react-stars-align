@@ -53,9 +53,9 @@ export const removeJob = createAsyncThunk('jobs/removeJob', async (jobId) => {
   return jobId;
 });
 
-export const getEmployerJobs = createAsyncThunk('jobs/getEmployerJobs', async ({ page, limit }, thunkAPI) => {
+export const getEmployerJobs = createAsyncThunk('jobs/getEmployerJobs', async (_, thunkAPI) => {
   try {
-    const response = await fetchEmployerJobs(page, limit);
+    const response = await fetchEmployerJobs();
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -71,9 +71,9 @@ export const getJobApplications = createAsyncThunk('jobs/getJobApplications', as
   }
 });
 
-export const getAppliedJobs = createAsyncThunk('jobs/getAppliedJobs', async ({ page, limit }, thunkAPI) => {
+export const getAppliedJobs = createAsyncThunk('jobs/getAppliedJobs', async (query, thunkAPI) => {
   try {
-    const response = await fetchAppliedJobs(page, limit);
+    const response = await fetchAppliedJobs(query);
     return response;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
@@ -87,8 +87,6 @@ const jobsSlice = createSlice({
     job: null,
     loading: false,
     error: null,
-    page: 1,
-    totalPages: 1,
     filters: {
       search: '',
       type: '',
@@ -114,6 +112,7 @@ const jobsSlice = createSlice({
       .addCase(getJobs.fulfilled, (state, action) => {
         state.loading = false;
         state.jobs = action.payload;
+        state.job = [];
       })
       .addCase(getJobs.rejected, (state, action) => {
         state.loading = false;
@@ -176,9 +175,7 @@ const jobsSlice = createSlice({
       })
       .addCase(getEmployerJobs.fulfilled, (state, action) => {
         state.loading = false;
-        state.jobs = action.payload.jobs;
-        state.totalPages = action.payload.totalPages;
-        state.page = action.payload.currentPage;
+        state.jobs = action.payload;
       })
       .addCase(getEmployerJobs.rejected, (state, action) => {
         state.loading = false;
@@ -202,9 +199,7 @@ const jobsSlice = createSlice({
       })
       .addCase(getAppliedJobs.fulfilled, (state, action) => {
         state.loading = false;
-        state.jobs = action.payload.jobs;
-        state.totalPages = action.payload.totalPages;
-        state.page = action.payload.currentPage;
+        state.jobs = action.payload;
       })
       .addCase(getAppliedJobs.rejected, (state, action) => {
         state.loading = false;

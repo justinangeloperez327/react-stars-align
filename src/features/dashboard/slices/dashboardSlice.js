@@ -20,8 +20,8 @@ const dashboardSlice = createSlice({
     totalActiveJobs: 0,
     totalCloseJobs: 0,
     totalApplications: 0,
-    totalViewedApplications: 0,
-    totalPendingApplications: 0,
+    totalAccepted: 0,
+    totalRejected: 0,
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -35,8 +35,8 @@ const dashboardSlice = createSlice({
         state.totalActiveJobs = action.payload.totalActiveJobs;
         state.totalCloseJobs = action.payload.totalCloseJobs;
         state.totalApplications = action.payload.totalApplications;
-        state.totalViewedApplications = action.payload.totalViewedApplications;
-        state.totalPendingApplications = action.payload.totalPendingApplications;
+        state.totalAccepted = action.payload.totalAccepted;
+        state.totalRejected = action.payload.totalRejected;
         state.loading = false;
       })
       .addCase(getDashboardData.rejected, (state, action) => {

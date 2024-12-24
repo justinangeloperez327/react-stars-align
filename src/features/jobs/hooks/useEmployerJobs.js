@@ -3,15 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getEmployerJobs } from '../slices/jobsSlice';
 import { useEffect } from 'react';
 
-const useEmployerJobs = (page = 1, limit = 10) => {
+const useEmployerJobs = () => {
   const dispatch = useDispatch();
-  const { jobs, loading, error, totalPages } = useSelector((state) => state.jobs);
+  const { jobs, loading, error } = useSelector((state) => state.jobs);
 
   useEffect(() => {
-    dispatch(getEmployerJobs({ page, limit }));
-  }, [dispatch, page, limit]);
+    dispatch(getEmployerJobs());
+  }, [dispatch]);
 
-  return { jobs, loading, error, totalPages };
+  return { jobs, loading, error };
 };
 
 export default useEmployerJobs;

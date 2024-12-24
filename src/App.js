@@ -25,10 +25,12 @@ import JobPage from './pages/JobPage';
 import LoginPage from './pages/LoginPage';
 import NotFoundPage from './pages/NotFoundPage';
 import ProfilePage from './pages/ProfilePage';
+import ProtectedApplicationForm from './routes/ProtectedApplicationForm';
 import ProtectedRoute from './routes/ProtectedRoute';
 import PublicRoute from './routes/PublicRoute';
 import RegisterEmployerPage from './pages/RegisterEmployerPage';
 import RegisterPage from './pages/RegisterPage';
+import RegisterSuccessPage from './pages/RegisterSuccessPage';
 
 function App() {
   return (
@@ -45,7 +47,9 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="profile" element={<ProfilePage />} />
             <Route path="applied-jobs" element={<AppliedJobsPage />} />
-            <Route path="jobs/:jobId/application" element={<ApplicationPage />} />
+            <Route element={<ProtectedApplicationForm />}>
+              <Route path="jobs/:jobId/application" element={<ApplicationPage />} />
+            </Route>
             <Route path="jobs/:jobId/application/:applicationId/success" element={<ApplicationSuccessPage />} />
           </Route>
         </Route>
@@ -76,6 +80,7 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
             <Route path="/register-employer" element={<RegisterEmployerPage />} />
+            <Route path="/register-success" element={<RegisterSuccessPage />} />
           </Route>
         </Route>
 

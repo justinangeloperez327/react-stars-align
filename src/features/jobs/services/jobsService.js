@@ -76,9 +76,9 @@ export const deleteJob = async (jobId) => {
   }
 };
 
-export const fetchEmployerJobs = async (page = 1, limit = 10) => {
+export const fetchEmployerJobs = async () => {
   try {
-    const response = await axios.get(`${API_URL}/employer-jobs?page=${page}&limit=${limit}`, {
+    const response = await axios.get(`${API_URL}/employer-jobs`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,
@@ -104,9 +104,9 @@ export const fetchJobApplications = async (jobId) => {
   }
 };
 
-export const fetchAppliedJobs = async (page = 1, limit = 10) => {
+export const fetchAppliedJobs = async (query) => {
   try {
-    const response = await axios.get(`${API_URL}/applied-jobs?page=${page}&limit=${limit}`, {
+    const response = await axios.get(`${API_URL}/applied-jobs?${query}`, {
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${localStorage.getItem('token')}`,

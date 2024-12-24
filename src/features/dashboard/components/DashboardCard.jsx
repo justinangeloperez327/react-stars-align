@@ -3,7 +3,7 @@ import React, { Suspense } from 'react'
 import useDashboard from '../hooks/useDashboard';
 
 const DashboardCard = () => {
-    const { totalJobs, totalActiveJobs, totalCloseJobs, totalApplications, totalViewedApplications, totalPendingApplications } = useDashboard();
+    const { totalJobs, totalActiveJobs, totalCloseJobs, totalApplications, totalAccepted, totalRejected } = useDashboard();
 
     return (
         <Suspense fallback={<Loading />}>
@@ -19,8 +19,8 @@ const DashboardCard = () => {
                         <div className='bg-black text-white shadow rounded-lg p-6'>
                             <h2 className='text-xl font-bold mb-4'>Applications</h2>
                             <p>Total Applications: {totalApplications}</p>
-                            <p>Viewed Applications: {totalViewedApplications}</p>
-                            <p>Inactive Applications: {totalPendingApplications}</p>
+                            <p>Accepted Applications: {totalAccepted}</p>
+                            <p>Rejected Applications: {totalRejected}</p>
                         </div>
                     </div>
                 </div>

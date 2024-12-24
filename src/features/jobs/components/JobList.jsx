@@ -1,6 +1,5 @@
 import JobCard from './JobCard'
 import NoJobFound from './NoJobFound';
-import SkeletonCard from './SkeletonCard';
 import { Suspense } from 'react';
 import useJobs from '../hooks/useJobs'
 
@@ -10,7 +9,7 @@ const JobsList = () => {
     return (
         <>
             {error && <p className="text-red-500">{error}</p>}
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<NoJobFound />}>
                 {jobs.length > 0 ? (
                     jobs.map((job, index) => (
                         <JobCard
@@ -30,10 +29,6 @@ const JobsList = () => {
             </Suspense>
         </>
     )
-}
-
-const Loading = () => {
-    return <SkeletonCard />
 }
 
 export default JobsList

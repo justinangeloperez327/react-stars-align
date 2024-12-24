@@ -4,15 +4,14 @@ import React, { useState } from 'react'
 
 import DataTable from '@components/DataTable'
 import DeleteJobDialogBox from './DeleteJobDialogBox';
-import JobsPagination from './JobsPagination';
 import { Link } from 'react-router';
 import { formatDate } from '@utils/DateFormat';
 import useEmployerJobs from '../hooks/useEmployerJobs';
 import useRemoveJob from '../hooks/useRemoveJob';
 
 const JobsTable = () => {
-    const [page, setPage] = useState(1);
-    const { jobs, loading, error, totalPages } = useEmployerJobs(page);
+
+    const { jobs, loading, error } = useEmployerJobs();
     const { handleRemoveJob } = useRemoveJob();
     const columns = [
         { headerName: 'Title', field: 'title' },
@@ -96,7 +95,6 @@ const JobsTable = () => {
             {loading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             {jobs && <DataTable columns={columns} data={formattedJobs} bg="bg-black" text='text-white' />}
-            <JobsPagination page={page} totalPages={totalPages} setPage={setPage} />
             <DeleteJobDialogBox isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} deleteJob={confirmDeleteJob} />
         </>
     )

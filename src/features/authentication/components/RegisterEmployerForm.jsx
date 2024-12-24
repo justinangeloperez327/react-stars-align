@@ -55,6 +55,7 @@ const RegisterEmployerForm = () => {
                         onChange={(e) => setEmail(e.target.value)}
                         placeholder='Enter your email'
                         disabled={loading}
+                        autoComplete='email'
                     />
                 </Field>
 
