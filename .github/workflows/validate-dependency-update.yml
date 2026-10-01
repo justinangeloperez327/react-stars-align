@@ -28,4 +28,4 @@ jobs:
       - name: Build
         run: npm run build
 
-# Temporary workflow used only to verify this dependency update. Final pass.
+# Temporary workflow used only to verify this dependency update. Final pass after lint cleanup.
