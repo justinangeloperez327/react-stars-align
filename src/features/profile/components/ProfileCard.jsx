@@ -1,6 +1,5 @@
 import ProfileEducationForm from './ProfileEducationForm';
 import ProfileExperienceForm from './ProfileExperienceForm';
-import ProfileForm from './ProfileForm';
 import SkeletonProfileCard from './SkeletonProfileCard';
 import { Suspense } from 'react'
 import useProfile from '../hooks/useProfile';

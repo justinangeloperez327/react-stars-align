@@ -1,21 +1,29 @@
 import './index.css';
 
 import App from './App';
+import { ParticlesProvider } from '@tsparticles/react';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router';
+import { loadSlim } from '@tsparticles/slim';
 import reportWebVitals from './reportWebVitals';
 import { store } from './app/store';
+
+const initParticles = async (engine) => {
+  await loadSlim(engine);
+};
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <App />
-      </Router>
-    </Provider>
+    <ParticlesProvider init={initParticles}>
+      <Provider store={store}>
+        <Router>
+          <App />
+        </Router>
+      </Provider>
+    </ParticlesProvider>
   </React.StrictMode>
 );
 
